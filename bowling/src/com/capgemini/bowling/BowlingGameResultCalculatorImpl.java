@@ -168,19 +168,27 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 	private void regularRoundRoll(int numberOfPins) {
 		if (rounds.get(currentRound - 1).getFirstStrikeScore() == -1) {
 			if (numberOfPins == 10) {
-				if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()) {
+				if (rounds.get(currentRound - 3).isStrikeFlag() && rounds.get(currentRound - 2).isStrikeFlag()) {
+					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
+					rounds.get(currentRound - 1).setStrikeFlag(true);
+					combinedScore += numberOfPins * 3;
+					currentRound++;
+				} else if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()){
 					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					rounds.get(currentRound - 1).setStrikeFlag(true);
 					combinedScore += numberOfPins * 2;
 					currentRound++;
 				} else {
-					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					rounds.get(currentRound - 1).setStrikeFlag(true);
+					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					combinedScore += numberOfPins;
 					currentRound++;
 				}
 			} else {
-				if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()) {
+				if (rounds.get(currentRound - 3).isStrikeFlag() && rounds.get(currentRound - 2).isStrikeFlag()) {
+					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
+					combinedScore += numberOfPins * 3;
+				} else if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()){
 					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					combinedScore += numberOfPins * 2;
 				} else {

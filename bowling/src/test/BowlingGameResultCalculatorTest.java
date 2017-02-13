@@ -60,5 +60,25 @@ public class BowlingGameResultCalculatorTest {
 		// then
 		Assert.assertEquals(13, result);
 	}
+	
+	@Test
+	public void isScoreAfterEightRoundsCorrect() {
+		// given
+		calculator.roll(10);
+		calculator.roll(9);
+		calculator.roll(1);
+		calculator.roll(5);
+		calculator.roll(5);
+		calculator.roll(7);
+		calculator.roll(2);
+		calculator.roll(10);
+		calculator.roll(10);
+		calculator.roll(10);
+		calculator.roll(9);
+		// when
+		int result = calculator.getCombinedScore();
+		// then
+		Assert.assertEquals(148, result);
+	}
 
 }
