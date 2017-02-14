@@ -9,7 +9,8 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 
 	private int combinedScore;
 	private int currentRound = 1;
-	private boolean bonusRounds = false;
+	private boolean firstBonusRound = false;
+	private boolean secondBonusRound = false;
 	public List<Round> rounds;
 
 	public BowlingGameResultCalculatorImpl() {
@@ -58,11 +59,13 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 				lastRoundRoll(numberOfPins);
 				break;
 			case 11:
-				lastRoundRoll(numberOfPins);
+				extraRoundRoll(numberOfPins);
 				break;
 			case 12:
-				lastRoundRoll(numberOfPins);
+				extraRoundRoll(numberOfPins);
 				break;
+			default:
+				System.out.println("Gra zakonczona");
 
 			}
 
@@ -169,8 +172,14 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 	}
 
 	private void lastRoundRoll(int numberOfPins) {
-		if (rounds.get(currentRound-2).isStrikeFlag() && numberOfPins == 10){
-			bonusRounds = true;
+		if (rounds.get(currentRound - 2).isStrikeFlag() && numberOfPins == 10) {
+			secondBonusRound = true;
+			firstBonusRound = true;
+			regularRoundRoll(numberOfPins);
+		} else if ((rounds.get(currentRound - 1).getFirstStrikeScore() + numberOfPins) == 10) {
+			firstBonusRound = true;
+			regularRoundRoll(numberOfPins);
+		} else {
 			regularRoundRoll(numberOfPins);
 		}
 
@@ -184,7 +193,7 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 					rounds.get(currentRound - 1).setStrikeFlag(true);
 					combinedScore += numberOfPins * 3;
 					currentRound++;
-				} else if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()){
+				} else if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()) {
 					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					rounds.get(currentRound - 1).setStrikeFlag(true);
 					combinedScore += numberOfPins * 2;
@@ -199,7 +208,7 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 				if (rounds.get(currentRound - 3).isStrikeFlag() && rounds.get(currentRound - 2).isStrikeFlag()) {
 					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					combinedScore += numberOfPins * 3;
-				} else if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()){
+				} else if (rounds.get(currentRound - 2).isStrikeFlag() || rounds.get(currentRound - 2).isSpareFlag()) {
 					rounds.get(currentRound - 1).setFirstStrikeScore(numberOfPins);
 					combinedScore += numberOfPins * 2;
 				} else {
@@ -235,13 +244,25 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 			}
 		}
 	}
-	
+
 	private void extraRoundRoll(int numberOfPins) {
-		if(currentRound > 12){
-			throw new IllegalStateException();
+		if (!firstBonusRound) {
+			throw new IllegalStateException("Gra zakonczona");
+		} else if (currentRound == 12 && !secondBonusRound){
+			throw new IllegalStateException("Gra zakonczona");
 		}
-		combinedScore += numberOfPins;
-		currentRound ++;
+
+		if (currentRound == 11 && firstBonusRound) {
+			combinedScore += numberOfPins;
+			currentRound++;
+
+		}
+
+		if (currentRound == 12 && secondBonusRound) {
+			combinedScore += numberOfPins;
+			currentRound++;
+		}
+
 	}
 
 	public int getCombinedScore() {

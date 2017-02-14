@@ -80,6 +80,7 @@ public class BowlingGameResultCalculatorTest {
 		calculator.roll(2);
 		calculator.roll(9);
 		calculator.roll(1);
+		calculator.roll(10);
 		// when
 		int result = calculator.getCombinedScore();
 		// then
