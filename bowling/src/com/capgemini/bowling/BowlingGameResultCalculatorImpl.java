@@ -255,11 +255,11 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 		if (currentRound == 11 && firstBonusRound) {
 			combinedScore += numberOfPins;
 			currentRound++;
-
+			return;
 		}
 
 		if (currentRound == 12 && secondBonusRound) {
-			combinedScore += numberOfPins;
+			combinedScore += numberOfPins*2;
 			currentRound++;
 		}
 
