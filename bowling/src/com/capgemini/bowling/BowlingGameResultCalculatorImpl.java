@@ -9,6 +9,7 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 
 	private int combinedScore;
 	private int currentRound = 1;
+	private boolean bonusRounds = false;
 	public List<Round> rounds;
 
 	public BowlingGameResultCalculatorImpl() {
@@ -54,6 +55,12 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 				regularRoundRoll(numberOfPins);
 				break;
 			case 10:
+				lastRoundRoll(numberOfPins);
+				break;
+			case 11:
+				lastRoundRoll(numberOfPins);
+				break;
+			case 12:
 				lastRoundRoll(numberOfPins);
 				break;
 
@@ -162,6 +169,10 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 	}
 
 	private void lastRoundRoll(int numberOfPins) {
+		if (rounds.get(currentRound-2).isStrikeFlag() && numberOfPins == 10){
+			bonusRounds = true;
+			regularRoundRoll(numberOfPins);
+		}
 
 	}
 
@@ -223,6 +234,14 @@ public class BowlingGameResultCalculatorImpl implements BowlingGameResultCalcula
 				}
 			}
 		}
+	}
+	
+	private void extraRoundRoll(int numberOfPins) {
+		if(currentRound > 12){
+			throw new IllegalStateException();
+		}
+		combinedScore += numberOfPins;
+		currentRound ++;
 	}
 
 	public int getCombinedScore() {

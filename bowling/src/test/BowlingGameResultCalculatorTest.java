@@ -75,10 +75,15 @@ public class BowlingGameResultCalculatorTest {
 		calculator.roll(10);
 		calculator.roll(10);
 		calculator.roll(9);
+		calculator.roll(0);
+		calculator.roll(8);
+		calculator.roll(2);
+		calculator.roll(9);
+		calculator.roll(1);
 		// when
 		int result = calculator.getCombinedScore();
 		// then
-		Assert.assertEquals(148, result);
+		Assert.assertEquals(187, result);
 	}
 
 }
