@@ -11,6 +11,9 @@ public class GameOfLifeImpl implements GameOfLife {
 
 	@Override
 	public void initializeBoard(int size) {
+		if (size < 0) {
+			throw new IllegalStateException("Podany rozmiar jest niedopuszczalny");
+		}
 		board = new Cell[size][size];
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -24,7 +27,7 @@ public class GameOfLifeImpl implements GameOfLife {
 	@Override
 	public void initializeGameStateRandomly(int aliveCellsNumber) {
 		if (aliveCellsNumber > board.length * board.length) {
-			throw new IllegalStateException();
+			throw new IllegalStateException("Ilosc zywych komorek nie moze przekraczac ilosci wolnych kratek");
 		}
 
 		int posY, posX, cellsToInitialize;
@@ -83,7 +86,7 @@ public class GameOfLifeImpl implements GameOfLife {
 	@Override
 	public void initializeGameStateManually(int posY, int posX) {
 		if (board[posY][posX].isAlive()) {
-			throw new IllegalStateException();
+			throw new IllegalStateException("Dana komorka zostala juz ozywiona");
 		} else {
 			board[posY][posX].setAlive(true);
 			board[posY][posX].setAxisY(posY);

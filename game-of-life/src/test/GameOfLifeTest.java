@@ -162,4 +162,27 @@ public class GameOfLifeTest {
 		Assert.assertEquals(5, aliveCells);
 	}
 	
+	@Test
+	public void shouldThrowIllegalStateException() {
+				
+		try{
+			game.initializeBoard(5);
+			game.initializeGameStateRandomly(50);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void shouldThrowIllegalStateException2() {
+				
+		try{
+			game.initializeBoard(-5);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
 }
