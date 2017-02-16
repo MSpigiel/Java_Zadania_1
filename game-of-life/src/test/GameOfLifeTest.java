@@ -163,7 +163,7 @@ public class GameOfLifeTest {
 	}
 	
 	@Test
-	public void shouldThrowIllegalStateException() {
+	public void shouldThrowIllegalStateExceptionIfTooManyCellsGivenToSetGameUp() {
 				
 		try{
 			game.initializeBoard(5);
@@ -175,7 +175,7 @@ public class GameOfLifeTest {
 	}
 	
 	@Test
-	public void shouldThrowIllegalStateException2() {
+	public void shouldThrowIllegalStateExceptionIfWrongSizeOfBoardGiven() {
 				
 		try{
 			game.initializeBoard(-5);

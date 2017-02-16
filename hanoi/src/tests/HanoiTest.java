@@ -36,7 +36,7 @@ public class HanoiTest {
 	}
 	
 	@Test
-	public void checkIfGameIsWon() {
+	public void shouldCompleteGame() {
 		try{
 			hanoi.towers[0].initialize(3);
 			hanoi.towers[2].putDiskOnTop(hanoi.towers[0].getUpperDisk(hanoi.towers[2]));

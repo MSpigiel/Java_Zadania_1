@@ -12,6 +12,14 @@ public class Transaction {
 
 	public Transaction(int fromID, int toID, int amount) {
 		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		if(fromID < 1 || toID < 1){
+			throw new IllegalStateException("Bledne ID");
+		}
+		
+		if(amount < 0){
+			throw new IllegalStateException("Kwota transferu nie może być minejsza niż 0");
+		}
+		
 		setFromUserID(fromID);
 		setToUserID(toID);
 		setTransferAmount(amount);
