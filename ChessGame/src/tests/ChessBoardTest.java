@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import com.capgemini.chessgame.ChessBoard;
 import com.capgemini.chessgame.Colour;
-import com.capgemini.chessgame.Field;
 
 
 public class ChessBoardTest {
@@ -244,6 +243,58 @@ public class ChessBoardTest {
 		Assert.assertNull(board.getBoard()[1][1].getChessman());
 	}
 	
+	@Test
+	public void shouldCaptureOppositeFigure() {
+		//given
+		board.initializeOneQueen(6,6, Colour.BLACK);
+		board.initializeOnePawn(1, 1, Colour.WHITE);
+		//when
+		board.move(board.getBoard()[6][6], board.getBoard()[1][1]);
+		//then
+		
+		Assert.assertNull(board.getBoard()[6][6].getChessman());
+		
+	}
+	
+	@Test
+	public void shouldThrowExceptionWhenMoveOnFieldWhichContainsFigureWithTheSameColour() {
+		//given
+		board.initializeOneQueen(6,6, Colour.BLACK);
+		board.initializeOnePawn(1, 1, Colour.BLACK);
+		//when
+		try{
+			board.move(board.getBoard()[6][6], board.getBoard()[1][1]);
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void shouldMoveKnightOverOtherFigure() {
+		//given
+		board.initializeOneKnight(0, 0, Colour.WHITE);
+		board.initializeOneRook(0, 1, Colour.WHITE);
+		board.initializeOneRook(0, 2, Colour.WHITE);
+		//when
+		board.move(board.getBoard()[0][0], board.getBoard()[1][2]);
+		//then
+		Assert.assertNull(board.getBoard()[0][0].getChessman());
+		Assert.assertNotNull(board.getBoard()[1][2].getChessman());
+	}
+	
+	@Test
+	public void shouldCaptureOppositeFigureByKnightWhenMovingOverOtherFigure() {
+		//given
+		board.initializeOneKnight(0, 0, Colour.WHITE);
+		board.initializeOneRook(0, 1, Colour.WHITE);
+		board.initializeOneRook(0, 2, Colour.WHITE);
+		board.initializeOneRook(1, 2, Colour.BLACK);
+		//when
+		board.move(board.getBoard()[0][0], board.getBoard()[1][2]);
+		//then
+		Assert.assertNull(board.getBoard()[0][0].getChessman());
+		Assert.assertNotNull(board.getBoard()[1][2].getChessman());
+	}
 	
 	
 	
