@@ -4,12 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.capgemini.chessGame.ChessBoard;
+import com.capgemini.chessgame.ChessBoard;
+import com.capgemini.chessgame.Colour;
 
-import Shapes.Colour;
-
-
-public class ChessGameTest {
+public class PawnTest {
 
 	ChessBoard board;
 
@@ -22,7 +20,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldMoveWhitePawnOneFieldForward() {
 		// given
-		board.initializeOneChessman(0,0,Colour.WHITE);
+		board.initializeOnePawn(0,0,Colour.WHITE);
 		// when
 		board.getBoard()[0][0].getChessman().move(1,0);
 		int x = board.getBoard()[0][0].getChessman().getPosX();
@@ -34,7 +32,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldMoveWhitePawnTwoFieldsForward() {
 		// given
-		board.initializeOneChessman(0,0,Colour.WHITE);
+		board.initializeOnePawn(0,0,Colour.WHITE);
 		// when
 		board.getBoard()[0][0].getChessman().move(2,0);
 		int x = board.getBoard()[0][0].getChessman().getPosX();
@@ -46,7 +44,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldNotMoveWhitePawnThreeFieldsForward() {
 		// given
-		board.initializeOneChessman(0,0,Colour.WHITE);
+		board.initializeOnePawn(0,0,Colour.WHITE);
 		// when
 		board.getBoard()[0][0].getChessman().move(3,0);
 		int x = board.getBoard()[0][0].getChessman().getPosX();
@@ -58,7 +56,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldNotMoveWhitePawnTwoFieldsForward() {
 		// given
-		board.initializeOneChessman(0,0,Colour.WHITE);
+		board.initializeOnePawn(0,0,Colour.WHITE);
 		// when
 		board.getBoard()[0][0].getChessman().move(1,0);
 		board.getBoard()[0][0].getChessman().move(3,0);
@@ -71,7 +69,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldMoveBlackPawnTwoFieldsForward() {
 		// given
-		board.initializeOneChessman(6,0,Colour.BLACK);
+		board.initializeOnePawn(6,0,Colour.BLACK);
 		// when
 		board.getBoard()[6][0].getChessman().move(4,0);
 		int x = board.getBoard()[6][0].getChessman().getPosX();
@@ -82,7 +80,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldNotMoveBlackPawnOneFieldBackward() {
 		// given
-		board.initializeOneChessman(6,0,Colour.BLACK);
+		board.initializeOnePawn(6,0,Colour.BLACK);
 		// when
 		board.getBoard()[6][0].getChessman().move(7,0);
 		int x = board.getBoard()[6][0].getChessman().getPosX();
@@ -93,7 +91,7 @@ public class ChessGameTest {
 	@Test
 	public void shouldNotMoveBlackPawnOneFieldRight() {
 		// given
-		board.initializeOneChessman(6,0,Colour.BLACK);
+		board.initializeOnePawn(6,0,Colour.BLACK);
 		// when
 		board.getBoard()[6][0].getChessman().move(6,1);
 		int y = board.getBoard()[6][0].getChessman().getPosY();
@@ -101,23 +99,4 @@ public class ChessGameTest {
 		Assert.assertNotEquals(1, y);		
 	}
 
-	// @Test
-	// public void shouldInitializeOnePawnOn00Field(){
-	// //given
-	// board.initializeDefaultGameState();
-	// //when
-	//
-	// //then
-	// Assert.assertFalse(isInitialized);
-	// }
-	//
-	// @Test
-	// public void shouldMovePawn(){
-	// //given
-	// board.initializeDefaultGameState();
-	// //when
-	//
-	// //then
-	// Assert.assertFalse(isInitialized);
-	// }
 }

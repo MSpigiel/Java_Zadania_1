@@ -1,6 +1,4 @@
-package com.capgemini.chessGame;
-
-import Shapes.Colour;
+package com.capgemini.chessgame;
 
 public class ChessGame {
 	

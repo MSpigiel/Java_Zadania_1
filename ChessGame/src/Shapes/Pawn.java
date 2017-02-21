@@ -1,20 +1,21 @@
 package Shapes;
 
+import com.capgemini.chessgame.Colour;
 
 public class Pawn extends Shape {
 
-	private boolean doubleMoveAvaliable = true;
+	private boolean doubleMoveAvaliable;
 	private boolean isEndOfBoardReached;
 
 	public Pawn(int posX, int posY, Colour colour) {
 		super(posX, posY, colour);
+		setDoubleMoveAvaliable(true);
 		setEndOfBoardReached(false);
 	}
 
 	public void move(int toX, int toY) {
 		if (moveValidation(toX, toY)) {
-			setPosX(toX);
-			setPosY(toY);
+			setNewPosition(toX, toY);
 			doubleMoveAvaliable = false;
 		}		
 		changeAtTheEnd();
@@ -55,27 +56,6 @@ public class Pawn extends Shape {
 		}
 	}
 
-	public int getPosX() {
-		return posX;
-	}
-
-	private void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	private void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public Colour getColour() {
-		return figureColour;
-	}
-
-
 	public boolean isEndOfBoardReached() {
 		return isEndOfBoardReached;
 	}
@@ -94,5 +74,9 @@ public class Pawn extends Shape {
 				setEndOfBoardReached(true);
 			}
 		}
+	}
+
+	private void setDoubleMoveAvaliable(boolean b) {
+		doubleMoveAvaliable = b;		
 	}
 }

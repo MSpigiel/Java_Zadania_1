@@ -1,5 +1,7 @@
 package Shapes;
 
+import com.capgemini.chessgame.Colour;
+
 public abstract class Shape {
 
 	protected int posX, posY;
@@ -25,6 +27,10 @@ public abstract class Shape {
 	
 	public int getPosY(){
 		return posY;
+	}
+	
+	public Colour getColour(){
+		return figureColour;
 	}
 
 	public abstract void move(int toX, int toY);
