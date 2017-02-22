@@ -8,6 +8,7 @@ import Shapes.Knight;
 import Shapes.Pawn;
 import Shapes.Queen;
 import Shapes.Rook;
+import Shapes.Shape;
 
 public class ChessBoard {
 
@@ -23,12 +24,11 @@ public class ChessBoard {
 		}
 	}
 
+	public ChessBoard(ChessBoard aBoard){
+		this.board = aBoard.board;
+	}
+
 	public void move(Field sourceField, Field targetField) {
-		
-		while(validateIfCheck()){
-			
-		}
-		
 		if (validateIfNoChessmanOnWay(sourceField, targetField)) {
 				board[sourceField.getPosX()][sourceField.getPosY()].getChessman().move(targetField.getPosX(),
 						targetField.getPosY());
@@ -94,7 +94,11 @@ public class ChessBoard {
 	public Field[][] getBoard() {
 		return this.board;
 	}
-
+	
+	public Shape getShapeOnCoordinates(int x, int y){
+		return this.board[x][y].getChessman();
+	}
+	
 	public int getSize() {
 		return size;
 	}
@@ -219,11 +223,6 @@ public class ChessBoard {
 			}
 		}
 		return true;
-	}
-
-	private boolean validateIfCheck(){
-	
-		return false;
 	}
 	
 	private Direction findMoveDirection(int posX, int posY, int toX, int toY) {
